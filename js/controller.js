@@ -52,7 +52,7 @@ class ExpenseController {
       });
       this.view.hideErrorMessage();
     } catch (error) {
-      this.view.displayAmountErrorMessage();
+      this.displayErrorMessage(error);
     }
   }
 
@@ -79,7 +79,7 @@ class ExpenseController {
       this.view.unsetExpenseEditable(id);
       this.setUpEventHandlers();
     } catch (error) {
-      this.view.displayAmountErrorMessage();
+      this.displayErrorMessage(error);
     }
   }
 
@@ -109,6 +109,14 @@ class ExpenseController {
 
   hideErrorMessage() {
     this.view.hideErrorMessage();
+  }
+
+  displayErrorMessage(error) {
+    if (error instanceof InvalidAmountError) {
+      this.view.displayAmountErrorMessage();
+    } else {
+      this.view.displayDateErrorMessage();
+    }
   }
 
   notify() {

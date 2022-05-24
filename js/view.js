@@ -89,6 +89,11 @@ class ExpenseView {
     this.DOM.errorMessage.className = "";
   }
 
+  displayDateErrorMessage() {
+    this.DOM.errorMessage.innerText = "Invalid date!";
+    this.DOM.errorMessage.className = "";
+  }
+
   hideErrorMEssage() {
     this.DOM.errorMessage.innerText = "";
     this.DOM.errorMessage.className = "hidden";
