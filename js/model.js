@@ -65,6 +65,10 @@ class ExpenseModel {
   validateAmount(amount) {
     if (amount.length === 0) throw new InvalidAmountError();
 
+    const matches = amount.match(/^(\d*)(\.\d{0,2})?$/);
+
+    if (!matches) throw new InvalidAmountError();
+
     return amount;
   }
 }
