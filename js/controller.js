@@ -5,6 +5,7 @@ class ExpenseController {
     this.view = view;
     this.addExpense = this.addExpense.bind(this);
     this.removeExpense = this.removeExpense.bind(this);
+    this.hideErrorMessage = this.hideErrorMessage.bind(this);
     this.setExpenseEditable = this.setExpenseEditable.bind(this);
     this.unsetExpenseEditable = this.unsetExpenseEditable.bind(this);
     this.editExpense = this.editExpense.bind(this);
@@ -13,6 +14,7 @@ class ExpenseController {
 
   setUpEventHandlers() {
     this.DOM.expenseForm.addEventListener("submit", this.addExpense);
+    this.DOM.expenseForm.addEventListener("reset", this.hideErrorMessage);
 
     [...this.DOM.deleteButtons].forEach((deleteButton) => {
       deleteButton.addEventListener("click", this.removeExpense);
@@ -66,15 +68,19 @@ class ExpenseController {
       description: { value: description },
     } = form;
 
-    this.model.editExpense({
-      amount,
-      date,
-      description,
-      id,
-    });
-
-    this.view.unsetExpenseEditable(id);
-    this.setUpEventHandlers();
+    try {
+      this.model.editExpense({
+        amount,
+        date,
+        description,
+        id,
+      });
+      this.view.hideErrorMessage();
+      this.view.unsetExpenseEditable(id);
+      this.setUpEventHandlers();
+    } catch (error) {
+      this.view.displayAmountErrorMessage();
+    }
   }
 
   removeExpense(event) {
@@ -96,8 +102,13 @@ class ExpenseController {
     const form = event.currentTarget;
     const expenseId = form.attributes["data-id"].value;
 
+    this.view.hideErrorMessage();
     this.view.unsetExpenseEditable(expenseId);
     this.setUpEventHandlers();
+  }
+
+  hideErrorMessage() {
+    this.view.hideErrorMessage();
   }
 
   notify() {
