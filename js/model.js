@@ -63,12 +63,24 @@ class ExpenseModel {
   }
 
   validateAmount(amount) {
+    if (amount.indexOf("$") === 0) {
+      amount = amount.substring(1);
+    }
+
     if (amount.length === 0) throw new InvalidAmountError();
 
     const matches = amount.match(/^(\d*)(\.\d{0,2})?$/);
 
     if (!matches) throw new InvalidAmountError();
 
-    return amount;
+    let [dollars, cents] = amount.split(".");
+
+    if (dollars.length === 0) dollars = "0";
+
+    if (!cents || cents.length === 0) cents = "00";
+
+    if (cents && cents.length === 1) cents += "0";
+
+    return `${dollars}.${cents}`;
   }
 }
