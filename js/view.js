@@ -11,6 +11,7 @@ class ExpenseView {
     return {
       editButtons: document.getElementsByClassName("edit"),
       deleteButtons: document.getElementsByClassName("delete"),
+      editForms: document.getElementsByClassName("edit-expense-form"),
       expenseForm: document.getElementById("new-expense-form"),
       expenses: document.getElementById("expenses"),
     };
@@ -22,6 +23,11 @@ class ExpenseView {
 
   setExpenseEditable(expenseId) {
     this.editableExpenses.add(expenseId);
+    this.notify();
+  }
+
+  unsetExpenseEditable(expenseId) {
+    this.editableExpenses.delete(expenseId);
     this.notify();
   }
 

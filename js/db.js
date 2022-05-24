@@ -15,6 +15,10 @@ class DB {
     localStorage.setItem(expense.id, JSON.stringify(expense));
   }
 
+  edit(expense) {
+    this.add(expense);
+  }
+
   remove(expenseId) {
     localStorage.removeItem(expenseId);
   }
