@@ -1,6 +1,8 @@
 class ExpenseController {
-  constructor(view) {
+  constructor(view, model) {
     this.DOM = view.getDOM();
+    this.model = model;
+    this.addExpense = this.addExpense.bind(this);
     this.setUpEventHandlers();
   }
 
@@ -11,6 +13,18 @@ class ExpenseController {
   addExpense(event) {
     event.preventDefault();
 
-    console.log("form submitted");
+    const form = event.currentTarget;
+
+    const {
+      amount: { value: amount },
+      date: { value: date },
+      description: { value: description },
+    } = form;
+
+    this.model.addExpense({
+      amount,
+      date,
+      description,
+    });
   }
 }
