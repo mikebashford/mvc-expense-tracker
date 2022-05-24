@@ -1,5 +1,3 @@
-const view = new ExpenseView();
 const model = new ExpenseModel();
+const view = new ExpenseView(model);
 const controller = new ExpenseController(view, model);
-
-console.log(view.getDOM());
