@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Expense Tracker</title>
+  </head>
+  <body>
+    <h1>Expense Tracker</h1>
+    <form action="" id="new-expense-form">
+      <div class="row">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            placeholder="Groceries"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="text" id="date" name="date" placeholder="mm/dd/yyyy" />
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="text" id="amount" name="amount" placeholder="99.99" />
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="reset">Cancel</button>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </body>
+</html>
