@@ -42,11 +42,16 @@ class ExpenseController {
       description: { value: description },
     } = form;
 
-    this.model.addExpense({
-      amount,
-      date,
-      description,
-    });
+    try {
+      this.model.addExpense({
+        amount,
+        date,
+        description,
+      });
+      this.view.hideErrorMessage();
+    } catch (error) {
+      this.view.displayAmountErrorMessage();
+    }
   }
 
   editExpense(event) {
